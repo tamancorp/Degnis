@@ -6,17 +6,32 @@ BASE_DIR = Path(r'C:\Degnis Music')
 SOURCE_DIR = BASE_DIR / 'Degnis Jazz'
 OUTPUT_FILE = BASE_DIR / 'index.html'
 
-# Lista de pistas
+# --- CONFIGURACIÓN DE ANALYTICS ---
+# Mañana reemplaza 'G-XXXXXXXXXX' con tu ID real de Google Analytics
+GA_ID = "G-XXXXXXXXXX" 
+
+# Lista de pistas actualizada (08 Venus, 09 Minerva, 10 Paula)
 tracks = [
     "01 Alborada.wav", "02 Denisse.wav", "03 Desirée.wav",
     "04 Victoria.wav", "05 Valentina.wav", "06 Valeria.wav",
-    "07 Alejandra.wav", "08 Cristina.wav", "09 Elianne.wav", "10 Suzie Q.wav"
+    "07 Alejandra.wav", 
+    "08 Venus.wav", 
+    "09 Minerva.wav", 
+    "10 Paula.wav"
 ]
 
 html_template = f"""
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{GA_ID}');
+    </script>
+
     <meta charset="UTF-8">
     <title>Degnis Jazz | Gold Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Oswald:wght@300;700&display=swap" rel="stylesheet">
@@ -38,7 +53,7 @@ html_template = f"""
             font-weight: 900; 
             font-size: 1.8rem; 
             text-transform: uppercase; 
-            color: #ff0000 !important; 
+            color: #ff0000 !important; /* Rojo Brillante */
             margin: 0; 
             letter-spacing: 5px; 
         }}
@@ -89,4 +104,4 @@ html_template += """
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_template)
 
-print("--- REPARACIÓN DE BIOGRAFÍA COMPLETADA ---")
+print("--- BUILD COMPLETADO: PISTAS ACTUALIZADAS Y ANALYTICS PREPARADO ---")
