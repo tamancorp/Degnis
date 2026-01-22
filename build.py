@@ -21,30 +21,50 @@ html_template = f"""
     <title>Degnis Jazz | Gold Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Oswald:wght@300;700&display=swap" rel="stylesheet">
     <style>
-        body {{ background: #000; color: #fff; font-family: 'Oswald', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }}
-        .hero {{ position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; background: #000; overflow: hidden; }}
-        img.cover {{ height: 100%; width: auto; max-width: 100%; object-fit: contain; -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0,0,0,0.3)); }}
-        h1 {{ font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2.2rem; text-transform: uppercase; color: #f1c40f !important; position: absolute; bottom: 5%; z-index: 10; margin: 0; text-shadow: 0 0 15px rgba(241, 196, 15, 0.6); letter-spacing: 6px; }}
+        body {{ background: #0b0b0b; color: #fff; font-family: 'Oswald', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }}
         
-        .section-title {{ color: #f1c40f; font-family: 'Playfair Display', serif; font-size: 1.8rem; text-align: center; margin-top: 80px; letter-spacing: 4px; text-transform: uppercase; border-bottom: 1px solid #332b00; padding-bottom: 10px; width: 80%; }}
+        /* Contenedor de imagen y título */
+        .hero {{ position: relative; width: 100%; max-width: 800px; margin-top: 20px; line-height: 0; }}
+        img.cover {{ width: 100%; height: auto; border-radius: 4px 4px 0 0; }}
         
-        .list {{ width: 90%; max-width: 850px; margin: 40px auto; }}
-        .track {{ background: rgba(241, 196, 15, 0.02); margin-bottom: 5px; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #332b00; transition: 0.3s; }}
-        .track:hover {{ background: rgba(241, 196, 15, 0.1); border-bottom: 1px solid #f1c40f; }}
-        .track-name {{ font-size: 1.1rem; color: #f1c40f !important; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; }}
+        /* Banda Oro con letras Negras al borde */
+        .gold-bar {{ 
+            background: #f1c40f; 
+            width: 100%; 
+            padding: 20px 0; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }}
+        h1 {{ 
+            font-family: 'Playfair Display', serif; 
+            font-weight: 900; 
+            font-size: 1.8rem; 
+            text-transform: uppercase; 
+            color: #000 !important; /* Letras Negras */
+            margin: 0; 
+            letter-spacing: 5px; 
+        }}
         
-        audio {{ filter: invert(1) brightness(1.2) sepia(1) saturate(3) hue-rotate(10deg); width: 250px; opacity: 0.6; }}
+        .section-title {{ color: #f1c40f; font-family: 'Playfair Display', serif; font-size: 1.5rem; text-align: center; margin-top: 60px; letter-spacing: 3px; text-transform: uppercase; }}
         
-        .footer {{ width: 80%; max-width: 850px; text-align: center; margin: 100px 0 100px 0; padding: 40px; border: 1px solid #332b00; background: rgba(241, 196, 15, 0.01); }}
-        .bio {{ font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #ccc; line-height: 1.8; margin-bottom: 30px; }}
-        .contact-btn {{ display: inline-block; padding: 15px 40px; border: 1px solid #f1c40f; color: #f1c40f; text-decoration: none; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; transition: 0.3s; }}
-        .contact-btn:hover {{ background: #f1c40f; color: #000; box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); }}
+        .list {{ width: 90%; max-width: 800px; margin: 30px auto; }}
+        .track {{ background: rgba(255, 255, 255, 0.03); margin-bottom: 2px; padding: 12px 25px; display: flex; align-items: center; justify-content: space-between; border-left: 3px solid #f1c40f; }}
+        .track-name {{ font-size: 1rem; color: #eee; text-transform: uppercase; font-weight: 300; letter-spacing: 1px; }}
+        
+        audio {{ filter: invert(1) grayscale(1) brightness(1.5); width: 220px; }}
+        
+        .footer {{ width: 100%; max-width: 800px; text-align: center; margin: 80px 0; padding: 40px 0; border-top: 1px solid #222; }}
+        .bio {{ font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #888; margin-bottom: 25px; }}
+        .contact-btn {{ display: inline-block; padding: 12px 30px; border: 1px solid #f1c40f; color: #f1c40f; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s; }}
+        .contact-btn:hover {{ background: #f1c40f; color: #000; }}
     </style>
 </head>
 <body>
     <div class="hero">
         <img src="Degnis Jazz/cover.jpg" class="cover">
-        <h1>Degnis Jazz | Gold Edition</h1>
+        <div class="gold-bar">
+            <h1>Degnis Jazz | Gold Edition</h1>
+        </div>
     </div>
 
     <h2 class="section-title">Repertorio Seleccionado</h2>
@@ -63,8 +83,7 @@ html_template += """
 
     <div class="footer">
         <div class="bio">
-            "Explorando las texturas del Jazz con una visión cinematográfica. <br> 
-            Composiciones diseñadas para narrar historias a través del sonido."
+            "Explorando las texturas del Jazz con una visión cinematográfica."
         </div>
         <a href="mailto:degnis@gmail.com" class="contact-btn">Solicitar Licencia / Contacto</a>
     </div>
@@ -75,4 +94,4 @@ html_template += """
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_template)
 
-print("--- CATÁLOGO CINEMATOGRÁFICO COMPLETO ---")
+print("--- REINICIO DE ESTILO COMPLETADO ---")
