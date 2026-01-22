@@ -26,7 +26,6 @@ html_template = f"""
         .hero {{ position: relative; width: 100%; max-width: 800px; margin-top: 20px; line-height: 0; }}
         img.cover {{ width: 100%; height: auto; border-radius: 4px 4px 0 0; }}
         
-        /* Banda Oro con letras ROJAS */
         .gold-bar {{ 
             background: #f1c40f; 
             width: 100%; 
@@ -39,7 +38,7 @@ html_template = f"""
             font-weight: 900; 
             font-size: 1.8rem; 
             text-transform: uppercase; 
-            color: #8b0000 !important; /* Rojo Oscuro Cinematográfico */
+            color: #ff0000 !important; 
             margin: 0; 
             letter-spacing: 5px; 
         }}
@@ -51,7 +50,7 @@ html_template = f"""
         audio {{ filter: invert(1) grayscale(1) brightness(1.5); width: 220px; }}
         
         .footer {{ width: 100%; max-width: 800px; text-align: center; margin: 80px 0; padding: 40px 0; border-top: 1px solid #222; }}
-        .bio {{ font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #888; margin-bottom: 25px; }}
+        .bio {{ font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #888; margin-bottom: 25px; line-height: 1.6; }}
         .contact-btn {{ display: inline-block; padding: 12px 30px; border: 1px solid #f1c40f; color: #f1c40f; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; transition: 0.3s; }}
         .contact-btn:hover {{ background: #f1c40f; color: #000; }}
     </style>
@@ -78,7 +77,8 @@ html_template += """
     </div>
     <div class="footer">
         <div class="bio">
-            "Explorando las texturas del Jazz con una visión cinematográfica."
+            "Explorando las texturas del Jazz con una visión cinematográfica.<br>
+            Composiciones diseñadas para narrar historias a través del sonido."
         </div>
         <a href="mailto:degnis@gmail.com" class="contact-btn">Solicitar Licencia / Contacto</a>
     </div>
@@ -89,4 +89,4 @@ html_template += """
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_template)
 
-print("--- ACTUALIZACIÓN: ROJO SOBRE ORO COMPLETADA ---")
+print("--- REPARACIÓN DE BIOGRAFÍA COMPLETADA ---")
