@@ -6,7 +6,7 @@ BASE_DIR = Path(r'C:\Degnis Music')
 SOURCE_DIR = BASE_DIR / 'Degnis Jazz'
 OUTPUT_FILE = BASE_DIR / 'index.html'
 
-# ID de Google Tag Manager
+# ID de Google Tag Manager (Instalado físicamente en el template)
 GTM_ID = "GTM-MNK5FR7B"
 
 # Lista de pistas actualizada (Degnis Jazz - Gold Edition)
@@ -29,6 +29,7 @@ html_template = f"""
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     }})(window,document,'script','dataLayer','{GTM_ID}');</script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Degnis Jazz | Gold Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Oswald:wght@300;700&display=swap" rel="stylesheet">
     <style>
@@ -99,7 +100,8 @@ html_template += """
 </html>
 """
 
+# Guardar el archivo generado
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_template)
 
-print(f"--- BUILD COMPLETADO: GTM ({GTM_ID}) INTEGRADO EXITOSAMENTE ---")
+print(f"--- BUILD COMPLETADO: GTM ({GTM_ID}) INSTALADO Y PISTAS ACTUALIZADAS ---")
