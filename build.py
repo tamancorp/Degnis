@@ -6,11 +6,10 @@ BASE_DIR = Path(r'C:\Degnis Music')
 SOURCE_DIR = BASE_DIR / 'Degnis Jazz'
 OUTPUT_FILE = BASE_DIR / 'index.html'
 
-# --- CONFIGURACIÓN DE ANALYTICS ---
-# Mañana reemplaza 'G-XXXXXXXXXX' con tu ID real de Google Analytics
-GA_ID = "G-XXXXXXXXXX" 
+# ID de Google Tag Manager
+GTM_ID = "GTM-MNK5FR7B"
 
-# Lista de pistas actualizada (08 Venus, 09 Minerva, 10 Paula)
+# Lista de pistas actualizada (Degnis Jazz - Gold Edition)
 tracks = [
     "01 Alborada.wav", "02 Denisse.wav", "03 Desirée.wav",
     "04 Victoria.wav", "05 Valentina.wav", "06 Valeria.wav",
@@ -24,14 +23,11 @@ html_template = f"""
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){{dataLayer.push(arguments);}}
-      gtag('js', new Date());
-      gtag('config', '{GA_ID}');
-    </script>
-
+    <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+    new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    }})(window,document,'script','dataLayer','{GTM_ID}');</script>
     <meta charset="UTF-8">
     <title>Degnis Jazz | Gold Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Oswald:wght@300;700&display=swap" rel="stylesheet">
@@ -71,6 +67,8 @@ html_template = f"""
     </style>
 </head>
 <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero">
         <img src="Degnis Jazz/cover.jpg" class="cover">
         <div class="gold-bar">
@@ -104,4 +102,4 @@ html_template += """
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_template)
 
-print("--- BUILD COMPLETADO: PISTAS ACTUALIZADAS Y ANALYTICS PREPARADO ---")
+print(f"--- BUILD COMPLETADO: GTM ({GTM_ID}) INTEGRADO EXITOSAMENTE ---")
