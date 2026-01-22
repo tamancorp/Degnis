@@ -1,25 +1,32 @@
 import os
 
+# ============================================================
+# MASTER TEMPLATE: DEGNIS ROMERO - CINEMATIC SERIES
+# ============================================================
+
 # --- CONFIGURACIÓN DEL ÁLBUM ---
+# Usamos comillas simples afuera para que las dobles salgan en la web
 TITULO_ALBUM = 'Suite "Monte Adentro"' 
 SUBTITULO = "Composición Cinemática de Degnis Romero"
-COLOR_ACCENTO = "#ff9e7d"  
-ID_GTM = "GTM-MNK5FR7B"
-# Intentaremos forzar la carga de la imagen
+COLOR_ACCENTO = "#ff9e7d"  # Un tono naranja suave como el atardecer
 IMAGEN_FONDO = "background.jpg" 
+ID_GTM = "GTM-MNK5FR7B"
 
 def generar_html():
+    # Detectar archivos de audio en la carpeta actual
     archivos_mp3 = [f for f in os.listdir('.') if f.endswith('.mp3')]
-    archivos_mp3.sort()
+    archivos_mp3.sort() # Ordenar alfabéticamente
 
     items_html = ""
     for pista in archivos_mp3:
-        nombre_pista = pista.replace('.mp3', '').replace('_', ' ')
+        # Limpiar el nombre para que se vea elegante (sin .mp3 ni guiones)
+        nombre_pista = pista.replace('.mp3', '').replace('_', ' ').replace('-', ' ')
         items_html += f"""
         <div class="track">
             <p>{nombre_pista}</p>
-            <audio controls>
+            <audio controls preload="metadata">
                 <source src="{pista}" type="audio/mpeg">
+                Tu navegador no soporta el audio.
             </audio>
         </div>
         """
@@ -28,59 +35,114 @@ def generar_html():
     <!DOCTYPE html>
     <html lang="es">
     <head>
+        <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+        new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        }})(window,document,'script','dataLayer','{ID_GTM}');</script>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{TITULO_ALBUM}</title>
+        
         <style>
+            * {{ box-sizing: border-box; }}
+            
             body {{
-                /* Forzamos la carga de la imagen con una ruta relativa directa */
-                background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./{IMAGEN_FONDO}');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-                background-color: #1a1a1a; /* Fondo de seguridad si falla la imagen */
-                color: white;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                min-height: 100vh;
+                font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                color: white;
+                background-color: #000; /* Fondo negro de seguridad */
+                
+                /* Configuración de la imagen de fondo */
+                background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('./{IMAGEN_FONDO}');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+            }}
+
+            .content-wrapper {{
+                width: 90%;
+                max-width: 800px;
+                padding: 60px 0;
+                text-align: center;
+            }}
+
+            h1 {{
+                font-size: clamp(2em, 5vw, 3.5em);
                 margin: 0;
-                padding: 40px 20px;
+                text-transform: uppercase;
+                letter-spacing: 6px;
+                text-shadow: 0 4px 15px rgba(0,0,0,0.8);
             }}
-            h1 {{ font-size: 2.8em; letter-spacing: 4px; text-transform: uppercase; text-shadow: 3px 3px 15px rgba(0,0,0,0.9); text-align: center; }}
-            h2 {{ color: {COLOR_ACCENTO}; font-weight: 300; margin-bottom: 40px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); text-align: center; font-style: italic; }}
-            .container {{ width: 100%; max-width: 750px; }}
+
+            h2 {{
+                font-size: 1.2em;
+                font-weight: 300;
+                color: {COLOR_ACCENTO};
+                margin-top: 10px;
+                margin-bottom: 50px;
+                letter-spacing: 2px;
+                text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            }}
+
+            .track-list {{
+                display: grid;
+                gap: 20px;
+            }}
+
             .track {{
-                background: rgba(40, 40, 40, 0.4); 
-                backdrop-filter: blur(15px); 
-                -webkit-backdrop-filter: blur(15px);
-                margin-bottom: 25px;
-                padding: 30px;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 25px;
                 border-radius: 15px;
-                border: 1px solid rgba(255,255,255,0.08);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                border: 1px solid rgba(255,255,255,0.1);
+                transition: transform 0.3s ease, background 0.3s ease;
             }}
-            .track p {{ margin: 0 0 15px 0; font-size: 1.1em; letter-spacing: 1px; color: #eee; }}
-            audio {{ width: 100%; filter: invert(100%) hue-rotate(180deg) brightness(1.5); opacity: 0.9; }}
-            footer {{ margin-top: auto; padding: 40px; font-size: 0.8em; opacity: 0.5; letter-spacing: 2px; }}
+
+            .track:hover {{
+                transform: translateY(-5px);
+                background: rgba(255, 255, 255, 0.15);
+            }}
+
+            .track p {{
+                margin: 0 0 15px 0;
+                font-size: 1.1em;
+                font-weight: 400;
+                letter-spacing: 1px;
+                text-transform: capitalize;
+            }}
+
+            audio {{
+                width: 100%;
+                height: 40px;
+                filter: contrast(0.1) brightness(1.8); /* Hace el reproductor más claro y elegante */
+            }}
+
+            footer {{
+                margin-top: auto;
+                padding: 40px;
+                font-size: 0.8em;
+                opacity: 0.6;
+                letter-spacing: 3px;
+            }}
         </style>
     </head>
     <body>
-        <h1>{TITULO_ALBUM}</h1>
-        <h2>{SUBTITULO}</h2>
-        <div class="container">
-            {items_html}
-        </div>
-        <footer>DEGNIS ROMERO &copy; 2026</footer>
-    </body>
-    </html>
-    """
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={ID_GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html_content)
-    print("¡Sistema reiniciado y optimizado!")
+        <div class="content-wrapper">
+            <h1>{TITULO_ALBUM}</h1>
+            <h2>{SUBTITULO}</h2>
 
-if __name__ == "__main__":
-    generar_html()
+            <div class="track-list">
+                {
     
+
