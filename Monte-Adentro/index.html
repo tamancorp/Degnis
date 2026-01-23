@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suite "Monte Adentro"</title>
@@ -8,20 +16,67 @@
         body {
             margin: 0; padding: 0; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
-            font-family: 'Segoe UI', sans-serif; color: white;
-            /* IMAGEN MÁS CLARA: Bajamos la opacidad del negro de 0.5 a 0.2 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white;
+            /* Máxima presencia de imagen: gradiente muy ligero */
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('./background.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
         }
         .container { width: 90%; max-width: 800px; padding: 60px 0; text-align: center; }
-        h1 { font-size: 3.5em; letter-spacing: 8px; text-transform: uppercase; margin: 0; text-shadow: 2px 4px 15px rgba(0,0,0,0.8); }
-        h2 { font-size: 1.3em; color: #ff9e7d; font-weight: 400; margin-bottom: 50px; text-shadow: 1px 2px 10px rgba(0,0,0,0.8); }
-        .track {
-            /* EFECTO CRISTAL: Más transparente para ver el fondo */
-            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px);
-            padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+        
+        h1 { 
+            font-size: clamp(2em, 8vw, 4em); 
+            letter-spacing: 8px; 
+            text-transform: uppercase; 
+            margin: 0;
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.9);
         }
-        audio { width: 100%; filter: contrast(0.1) brightness(1.8); }
+        
+        h2 { 
+            font-size: 1.2em; 
+            color: #ff9e7d; 
+            font-weight: 300; 
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .track {
+            background: rgba(0, 0, 0, 0.25); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .track:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        .track p { 
+            margin: 0 0 12px 0; 
+            font-size: 1.1em; 
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        audio { 
+            width: 100%; 
+            height: 35px;
+            filter: contrast(0.1) brightness(1.8) drop-shadow(0 2px 4px rgba(0,0,0,0.5)); 
+        }
+
+        footer { 
+            margin-top: auto; 
+            padding: 40px; 
+            opacity: 0.8; 
+            font-weight: bold; 
+            text-shadow: 1px 1px 5px black;
+            letter-spacing: 3px;
+        }
     </style>
 </head>
 <body>
@@ -36,13 +91,9 @@
         <div class="track"><p>05 Más Lejos Que Más Nunca</p><audio controls><source src="05 Más Lejos Que Más Nunca.mp3" type="audio/mpeg"></audio></div>
         <div class="track"><p>06 Simón Y Alida</p><audio controls><source src="06 Simón Y Alida.mp3" type="audio/mpeg"></audio></div>
         <div class="track"><p>07 Tucupido</p><audio controls><source src="07 Tucupido.mp3" type="audio/mpeg"></audio></div>
-        <div class="track"><p>08 Tolvanera Vallepascuense</p><audio controls><source src="08 Tolvanera Vallepascuense" type="audio/mpeg"></audio></div>
-        <div class="track"><p>09 Como Gallo En Cuerda</p><audio controls><source src="09 Como Gallo En Cuerda" type="audio/mpeg"></audio></div>
-        <div class="track"><p>10 Cacho En La Manga</p><audio controls><source src="10 Cacho En La Manga" type="audio/mpeg"></audio></div>
-        </div>
-</body>
-</html>
+        <div class="track"><p>08 Tolvanera Vallepascuense</p><audio controls><source src="08 Tolvanera Vallepascuense.mp3" type
     
+
 
 
 
