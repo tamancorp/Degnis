@@ -1,148 +1,46 @@
-import os
-
-# ============================================================
-# MASTER TEMPLATE: DEGNIS ROMERO - CINEMATIC SERIES
-# ============================================================
-
-# --- CONFIGURACIÓN DEL ÁLBUM ---
-# Usamos comillas simples afuera para que las dobles salgan en la web
-TITULO_ALBUM = 'Suite "Monte Adentro"' 
-SUBTITULO = "Composición Cinemática de Degnis Romero"
-COLOR_ACCENTO = "#ff9e7d"  # Un tono naranja suave como el atardecer
-IMAGEN_FONDO = "background.jpg" 
-ID_GTM = "GTM-MNK5FR7B"
-
-def generar_html():
-    # Detectar archivos de audio en la carpeta actual
-    archivos_mp3 = [f for f in os.listdir('.') if f.endswith('.mp3')]
-    archivos_mp3.sort() # Ordenar alfabéticamente
-
-    items_html = ""
-    for pista in archivos_mp3:
-        # Limpiar el nombre para que se vea elegante (sin .mp3 ni guiones)
-        nombre_pista = pista.replace('.mp3', '').replace('_', ' ').replace('-', ' ')
-        items_html += f"""
-        <div class="track">
-            <p>{nombre_pista}</p>
-            <audio controls preload="metadata">
-                <source src="{pista}" type="audio/mpeg">
-                Tu navegador no soporta el audio.
-            </audio>
-        </div>
-        """
-
-    html_content = f"""
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
-        new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        }})(window,document,'script','dataLayer','{ID_GTM}');</script>
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{TITULO_ALBUM}</title>
-        
-        <style>
-            * {{ box-sizing: border-box; }}
-            
-            body {{
-                margin: 0;
-                padding: 0;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-                color: white;
-                background-color: #000; /* Fondo negro de seguridad */
-                
-                /* Configuración de la imagen de fondo */
-                background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('./{IMAGEN_FONDO}');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-                background-repeat: no-repeat;
-            }}
-
-            .content-wrapper {{
-                width: 90%;
-                max-width: 800px;
-                padding: 60px 0;
-                text-align: center;
-            }}
-
-            h1 {{
-                font-size: clamp(2em, 5vw, 3.5em);
-                margin: 0;
-                text-transform: uppercase;
-                letter-spacing: 6px;
-                text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            }}
-
-            h2 {{
-                font-size: 1.2em;
-                font-weight: 300;
-                color: {COLOR_ACCENTO};
-                margin-top: 10px;
-                margin-bottom: 50px;
-                letter-spacing: 2px;
-                text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            }}
-
-            .track-list {{
-                display: grid;
-                gap: 20px;
-            }}
-
-            .track {{
-                background: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                padding: 25px;
-                border-radius: 15px;
-                border: 1px solid rgba(255,255,255,0.1);
-                transition: transform 0.3s ease, background 0.3s ease;
-            }}
-
-            .track:hover {{
-                transform: translateY(-5px);
-                background: rgba(255, 255, 255, 0.15);
-            }}
-
-            .track p {{
-                margin: 0 0 15px 0;
-                font-size: 1.1em;
-                font-weight: 400;
-                letter-spacing: 1px;
-                text-transform: capitalize;
-            }}
-
-            audio {{
-                width: 100%;
-                height: 40px;
-                filter: contrast(0.1) brightness(1.8); /* Hace el reproductor más claro y elegante */
-            }}
-
-            footer {{
-                margin-top: auto;
-                padding: 40px;
-                font-size: 0.8em;
-                opacity: 0.6;
-                letter-spacing: 3px;
-            }}
-        </style>
-    </head>
-    <body>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={ID_GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-        <div class="content-wrapper">
-            <h1>{TITULO_ALBUM}</h1>
-            <h2>{SUBTITULO}</h2>
-
-            <div class="track-list">
-                {
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suite "Monte Adentro"</title>
+    <style>
+        body {
+            margin: 0; padding: 0; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            font-family: 'Segoe UI', sans-serif; color: white;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('./background.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        .container { width: 90%; max-width: 800px; padding: 60px 0; text-align: center; }
+        h1 { font-size: 3em; letter-spacing: 6px; text-transform: uppercase; margin: 0; }
+        h2 { font-size: 1.2em; color: #ff9e7d; font-weight: 300; margin-bottom: 50px; }
+        .track {
+            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
+            padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .track p { margin: 0 0 15px 0; font-size: 1.1em; text-transform: capitalize; }
+        audio { width: 100%; filter: contrast(0.1) brightness(1.8); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Suite "Monte Adentro"</h1>
+        <h2>Composición Cinemática de Degnis Romero</h2>
+        <div class="track"><p>01 Rayando El Alba</p><audio controls><source src="01 Rayando El Alba.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>02 Llano De Mi Corazón</p><audio controls><source src="02 Llano De Mi Corazón.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>03 Cundeamores Y Cayenas</p><audio controls><source src="03 Cundeamores Y Cayenas.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>04 Corazón Enquayabao</p><audio controls><source src="04 Corazón Enquayabao.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>05 Más Lejos Que Más Nunca</p><audio controls><source src="05 Más Lejos Que Más Nunca.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>06 Simón Y Alida</p><audio controls><source src="06 Simón Y Alida.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>07 Tucupido</p><audio controls><source src="07 Tucupido.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>08 Tolvanera Vallepascuense</p><audio controls><source src="08 Tolvanera Vallepascuense.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>09 Como Gallo En Cuerda</p><audio controls><source src="09 Como Gallo En Cuerda.mp3" type="audio/mpeg"></audio></div>
+        <div class="track"><p>10 Cacho En La Manga</p><audio controls><source src="10 Cacho En La Manga.mp3" type="audio/mpeg"></audio></div>
+    </div>
+    <footer style="margin-top: auto; padding: 40px; opacity: 0.6; letter-spacing: 3px;">DEGNIS ROMERO &copy; 2026</footer>
+</body>
+</html>
     
+
 
